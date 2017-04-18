@@ -59,10 +59,19 @@ class Add(Node):
         Your code here!
         """
 
+class Linear(Node):
+    def __init__(self, inputs, weights, bias):
+        Node.__init__(self, [inputs, weights, bias])
+        # NOTE: The weights and bias properties here are not
+        # numbers, but rather references to other nodes.
+        # The weight and bias values are stored within the
+        # respective nodes.
 
-"""
-No need to change anything below here!
-"""
+    def forward(self):
+        weighted_sum = np.dot(self.inbound_nodes[0].value, self.inbound_nodes[1].value)
+        final_sum = weighted_sum + self.inbound_nodes[2].value
+        self.value = final_sum
+
 
 
 def topological_sort(feed_dict):
